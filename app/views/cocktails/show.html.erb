@@ -3,16 +3,38 @@
 <div class="row">
 
   <div class="col-6">
+    <h4>Ingredients</h4>
+
     <% @cocktail.doses.each do |dose| %>
     <li><%= dose.ingredient.name %>: <%= dose.description %></li>
     <% end %>
   </div>
 
   <div class="col-6">
+    <h4>Add ingredient</h4>
     <%= simple_form_for [@cocktail, @dose] do |f| %>
     <%= f.association :ingredient, input_html: { class: 'select2' } %>
     <%= f.input :description %>
     <%= f.submit %>
     <% end %>
   </div>
+
+  <div class="col-6 mt-4">
+    <h4>All reviews</h4>
+
+    <% @cocktail.reviews.each do |review| %>
+      <li><%= '⭐️' * review.rating %> - <%= review.content %></li>
+    <% end %>
+  </div>
+
+  <div class="col-6 mt-4">
+    <h4>Add review</h4>
+    <%= simple_form_for [@cocktail, @review] do |f| %>
+    <%= f.input :rating, collection: 0..5 %>
+    <%= f.input :content %>
+    <%= f.submit %>
+    <% end %>
+  </div>
+
+
 </div>
