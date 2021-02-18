@@ -4,13 +4,13 @@
 
   <div class="col-6">
     <% @cocktail.doses.each do |dose| %>
-    <%= dose.ingredient.name %>: <%= dose.description %>
+    <li><%= dose.ingredient.name %>: <%= dose.description %></li>
     <% end %>
   </div>
 
   <div class="col-6">
     <%= simple_form_for [@cocktail, @dose] do |f| %>
-    <%= f.association :ingredient %>
+    <%= f.association :ingredient, input_html: { class: 'select2' } %>
     <%= f.input :description %>
     <%= f.submit %>
     <% end %>
